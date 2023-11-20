@@ -1,7 +1,7 @@
 version: '2'
 
 volumes:
-  peer1.org1.cathaybc.com:
+  peer1.org2.cathaybc.com:
 
 
 networks:
@@ -9,8 +9,8 @@ networks:
 
 
 services:
-  peer1.org1.cathaybc.com:
-    container_name: peer1.org1.cathaybc.com
+  peer1.org2.cathaybc.com:
+    container_name: peer1.org2.cathaybc.com
     image: hyperledger/fabric-peer:2.2.1
     environment:
       #Generic peer variables
@@ -29,22 +29,22 @@ services:
       - CORE_PEER_TLS_KEY_FILE=/etc/hyperledger/fabric/tls/server.key
       - CORE_PEER_TLS_ROOTCERT_FILE=/etc/hyperledger/fabric/tls/ca.crt
       # Peer specific variabes
-      - CORE_PEER_ID=peer1.org1.cathaybc.com
-      - CORE_PEER_ADDRESS=peer1.org1.cathaybc.com:7051
+      - CORE_PEER_ID=peer1.org2.cathaybc.com
+      - CORE_PEER_ADDRESS=peer1.org2.cathaybc.com:7051
       - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
-      - CORE_PEER_CHAINCODEADDRESS=peer1.org1.cathaybc.com:7052
+      - CORE_PEER_CHAINCODEADDRESS=peer1.org2.cathaybc.com:7052
       - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
-      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.org1.cathaybc.com:7051
-      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org1.cathaybc.com:7051
-      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.org2.cathaybc.com:7051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.org2.cathaybc.com:7051
+      - CORE_PEER_LOCALMSPID=Org2MSP
       - PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/local/go/bin
     volumes:
       - /var/run/:/host/var/run/
       - ../crypto-config/:/etc/hyperledger/fabric/crypto-config
       - ../channel-artifacts/:/etc/hyperledger/fabric/channel-artifacts
-      - ../crypto-config/peerOrganizations/org1.cathaybc.com/peers/peer1.org1.cathaybc.com/msp:/etc/hyperledger/fabric/msp
-      - ../crypto-config/peerOrganizations/org1.cathaybc.com/peers/peer1.org1.cathaybc.com/tls:/etc/hyperledger/fabric/tls
-      - peer1.org1.cathaybc.com:/var/hyperledger/production
+      - ../crypto-config/peerOrganizations/org2.cathaybc.com/peers/peer1.org2.cathaybc.com/msp:/etc/hyperledger/fabric/msp
+      - ../crypto-config/peerOrganizations/org2.cathaybc.com/peers/peer1.org2.cathaybc.com/tls:/etc/hyperledger/fabric/tls
+      - peer1.org2.cathaybc.com:/var/hyperledger/production
       - ../../chaincode:/chaincode
       - ../config:/config
     working_dir: /etc/hyperledger/fabric/
@@ -58,6 +58,6 @@ services:
         peer node start
     ports:
       # HOST_PORT:CONTAINER_PORT，若啟動多個節點只須改 HOST_PORT 即可
-      - 8050:7051
+      - 8051:7051
     networks:
       - test

@@ -1,7 +1,7 @@
 version: '2'
 
 volumes:
-  orderer1.cathaybc.com:
+  orderer3.cathaybc.com:
 
 
 networks:
@@ -9,8 +9,8 @@ networks:
 
 
 services:
-  orderer1.cathaybc.com:
-    container_name: orderer1.cathaybc.com
+  orderer3.cathaybc.com:
+    container_name: orderer3.cathaybc.com
     image: hyperledger/fabric-orderer:2.2.1
     environment:
       - FABRIC_LOGGING_SPEC=INFO
@@ -34,11 +34,11 @@ services:
     command: orderer
     volumes:
       - ../system-genesis-block/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
-      - ../crypto-config/ordererOrganizations/cathaybc.com/orderers/orderer1.cathaybc.com/msp:/var/hyperledger/orderer/msp
-      - ../crypto-config/ordererOrganizations/cathaybc.com/orderers/orderer1.cathaybc.com/tls/:/var/hyperledger/orderer/tls
-      - orderer1.cathaybc.com:/var/hyperledger/production/orderer
+      - ../crypto-config/ordererOrganizations/cathaybc.com/orderers/orderer3.cathaybc.com/msp:/var/hyperledger/orderer/msp
+      - ../crypto-config/ordererOrganizations/cathaybc.com/orderers/orderer3.cathaybc.com/tls/:/var/hyperledger/orderer/tls
+      - orderer3.cathaybc.com:/var/hyperledger/production/orderer
     ports:
       # HOST_PORT:CONTAINER_PORT，若啟動多個節點只須改 HOST_PORT 即可
-      - 7050:7050
+      - 7052:7050
     networks:
       - test
